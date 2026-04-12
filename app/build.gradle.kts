@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "com.ton_nom.eventorias"
+    namespace = "com.openclassrooms.eventorias"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.ton_nom.eventorias"
+        applicationId = "com.openclassrooms.eventorias"
         minSdk = 24
         targetSdk = 35
         versionCode = 1

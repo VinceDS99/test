@@ -1,4 +1,4 @@
-package com.ton_nom.eventorias.ui.auth
+package com.openclassrooms.eventorias.ui.auth
 
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth

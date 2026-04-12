@@ -1,4 +1,4 @@
-package com.ton_nom.eventorias
+package com.openclassrooms.eventorias
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

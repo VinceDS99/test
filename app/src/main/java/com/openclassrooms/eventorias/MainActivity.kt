@@ -1,11 +1,11 @@
-package com.ton_nom.eventorias
+package com.openclassrooms.eventorias
 
+import com.openclassrooms.eventorias.ui.auth.LoginScreen
+import com.openclassrooms.eventorias.ui.theme.EventoriasTheme
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.ton_nom.eventorias.ui.auth.LoginScreen
-import com.ton_nom.eventorias.ui.theme.EventoriasTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint  // obligatoire pour Hilt

@@ -1,8 +1,12 @@
-package com.ton_nom.eventorias.ui.auth
+package com.openclassrooms.eventorias.ui.auth
+
+import com.openclassrooms.eventorias.R
+import com.openclassrooms.eventorias.ui.theme.GoogleButton
+import com.openclassrooms.eventorias.ui.theme.RedPrimary
+import com.openclassrooms.eventorias.ui.theme.White
 
 import android.app.Activity
 import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -19,10 +23,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
-import com.ton_nom.eventorias.R
-import com.ton_nom.eventorias.ui.theme.GoogleButton
-import com.ton_nom.eventorias.ui.theme.RedPrimary
-import com.ton_nom.eventorias.ui.theme.White
+
 
 @Composable
 fun LoginScreen(
