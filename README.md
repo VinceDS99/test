@@ -17,6 +17,15 @@
 - Hilt (injection de dépendances)
 
 
+## Utilisateur test
+
+Testuser@hotmail.com
+Test123456!
+
+Testuser2@hotmail.com
+John Doe
+Test123456!
+
 
 
 

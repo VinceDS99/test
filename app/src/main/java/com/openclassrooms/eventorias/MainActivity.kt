@@ -6,20 +6,31 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.runtime.collectAsState
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.openclassrooms.eventorias.ui.auth.AuthViewModel
+import com.openclassrooms.eventorias.ui.navigation.AppNavigation
 import dagger.hilt.android.AndroidEntryPoint
+import androidx.compose.runtime.getValue
 
-@AndroidEntryPoint  // obligatoire pour Hilt
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_Eventorias)
         enableEdgeToEdge()
         setContent {
             EventoriasTheme {
-                LoginScreen(
-                    onLoginSuccess = {
-                        // Navigation vers l'écran principal — sera implémentée à l'étape suivante
-                    }
-                )
+                val authViewModel: AuthViewModel = hiltViewModel()
+                val isLoggedIn by authViewModel.isLoggedIn.collectAsState()
+
+                if (isLoggedIn) {
+                    AppNavigation()  // ← écran principal avec bottom nav
+                } else {
+                    LoginScreen(
+                        onLoginSuccess = { authViewModel.onSignInSuccess() }
+                    )
+                }
             }
         }
     }

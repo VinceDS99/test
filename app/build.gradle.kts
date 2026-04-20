@@ -17,6 +17,12 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
+
+        buildConfigField(
+            "String",
+            "MAPS_API_KEY",
+            "\"AIzaSyBkNXnVe1nBN3IH4FvWjG_3K--vTFAtrhI\""
+        )
     }
 
     buildTypes {
@@ -29,6 +35,8 @@ android {
         }
     }
 
+
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -40,6 +48,7 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -76,4 +85,6 @@ dependencies {
     // Coil (images)
     implementation(libs.coil.compose)
 
+    // Icons
+    implementation("androidx.compose.material:material-icons-extended")
 }

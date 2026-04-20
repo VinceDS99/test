@@ -61,22 +61,13 @@ fun LoginScreen(
 
         // Logo
         Image(
-            painter = painterResource(id = R.drawable.ic_logo),
+            painter = painterResource(id = R.drawable.logo_eventorias),
             contentDescription = "Logo Eventorias",
-            modifier = Modifier.size(80.dp)
+            //Taille logo
+            modifier = Modifier.size(180.dp)
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
 
-        // Titre
-        Text(
-            text = "EVENTORIAS",
-            color = White,
-            fontSize = 22.sp,
-            fontWeight = FontWeight.Bold,
-            letterSpacing = 6.sp,
-            textAlign = TextAlign.Center
-        )
 
         Spacer(modifier = Modifier.height(64.dp))
 
