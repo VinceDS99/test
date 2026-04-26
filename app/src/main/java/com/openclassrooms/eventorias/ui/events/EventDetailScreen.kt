@@ -4,8 +4,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.CalendarToday
 import androidx.compose.material.icons.filled.Schedule
@@ -36,6 +38,7 @@ fun EventDetailScreen(
 
     Scaffold(
         containerColor = DarkBackground,
+        contentWindowInsets = WindowInsets(0),
         topBar = {
             TopAppBar(
                 title = {
@@ -49,7 +52,7 @@ fun EventDetailScreen(
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(
-                            imageVector = Icons.Default.ArrowBack,
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = "Retour",
                             tint = White
                         )
@@ -143,36 +146,42 @@ fun EventDetailScreen(
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-                // Adresse
-                Text(
-                    text = event.location,
-                    color = White,
-                    fontSize = 14.sp,
-                    lineHeight = 20.sp
-                )
 
-                Spacer(modifier = Modifier.height(12.dp))
 
-                // Carte Google Maps Static
-                val encodedLocation = URLEncoder.encode(event.location, "UTF-8")
-                val mapUrl = "https://maps.googleapis.com/maps/api/staticmap" +
-                        "?center=$encodedLocation" +
-                        "&zoom=15" +
-                        "&size=600x200" +
-                        "&maptype=roadmap" +
-                        "&markers=color:red%7C$encodedLocation" +
-                        "&key=${BuildConfig.MAPS_API_KEY}"
+                // Adresse à gauche + carte à droite
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = event.location,
+                        color = White,
+                        fontSize = 14.sp,
+                        lineHeight = 20.sp,
+                        modifier = Modifier.weight(1f)
+                    )
 
-                AsyncImage(
-                    model = mapUrl,
-                    contentDescription = "Carte de l'emplacement",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(160.dp)
-                        .clip(androidx.compose.foundation.shape.RoundedCornerShape(8.dp))
-                        .background(Color.Gray)
-                )
+                    Spacer(modifier = Modifier.width(12.dp))
+
+                    val encodedLocation = URLEncoder.encode(event.location, "UTF-8")
+                    val mapUrl = "https://maps.googleapis.com/maps/api/staticmap" +
+                            "?center=$encodedLocation" +
+                            "&zoom=15" +
+                            "&size=300x200" +
+                            "&maptype=roadmap" +
+                            "&markers=color:red%7C$encodedLocation" +
+                            "&key=${BuildConfig.MAPS_API_KEY}"
+
+                    AsyncImage(
+                        model = mapUrl,
+                        contentDescription = "Carte",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(width = 140.dp, height = 100.dp)
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(Color.Gray)
+                    )
+                }
 
                 Spacer(modifier = Modifier.height(24.dp))
             }

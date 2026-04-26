@@ -27,8 +27,6 @@ class EventListViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<EventListUiState>(EventListUiState.Loading)
     val uiState: StateFlow<EventListUiState> = _uiState
 
-    // Liste complète depuis Firestore
-    private val _allEvents = MutableStateFlow<List<Event>>(emptyList())
 
     init {
         loadEvents()

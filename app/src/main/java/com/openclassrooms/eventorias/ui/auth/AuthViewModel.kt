@@ -2,6 +2,7 @@ package com.openclassrooms.eventorias.ui.auth
 
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
+import com.openclassrooms.eventorias.notification.TokenRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,6 +19,8 @@ class AuthViewModel @Inject constructor() : ViewModel() {
 
     fun onSignInSuccess() {
         _isLoggedIn.value = true
+        // Sauvegarde le token FCM après connexion
+        TokenRepository.refreshAndSaveToken()
     }
 
     fun onSignOut() {
