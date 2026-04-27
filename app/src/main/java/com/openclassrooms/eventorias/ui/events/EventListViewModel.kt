@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.openclassrooms.eventorias.data.model.Event
 import com.openclassrooms.eventorias.data.repository.EventRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -34,6 +35,8 @@ class EventListViewModel @Inject constructor(
 
     private fun loadEvents() {
         viewModelScope.launch {
+            //delai fictif pour spinner
+            delay(2000)
             // Combine les événements et la recherche pour filtrer en temps réel
             combine(
                 repository.getEvents(),

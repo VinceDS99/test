@@ -13,6 +13,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.openclassrooms.eventorias.ui.auth.AuthViewModel
 import com.openclassrooms.eventorias.ui.events.CreateEventScreen
 import com.openclassrooms.eventorias.ui.events.EventDetailScreen
 import com.openclassrooms.eventorias.ui.events.EventListScreen
@@ -119,6 +120,13 @@ fun AppNavigation() {
                 CreateEventScreen(
                     onBack = { navController.popBackStack() },
                     onEventCreated = { navController.popBackStack() }
+                )
+            }
+
+            composable(Screen.Profile.route) {
+                val authViewModel: AuthViewModel = hiltViewModel()
+                ProfileScreen(
+                    onSignOut = { authViewModel.onSignOut() }
                 )
             }
 

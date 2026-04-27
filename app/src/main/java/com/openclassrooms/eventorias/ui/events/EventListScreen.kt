@@ -8,10 +8,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.Sort
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Sort
+import androidx.compose.material.icons.filled.SwapVert
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -88,7 +87,7 @@ fun EventListScreen(
                         // Icône tri (fonctionnalité future)
                         IconButton(onClick = { }) {
                             Icon(
-                                imageVector = Icons.AutoMirrored.Filled.Sort,
+                                imageVector = Icons.Default.SwapVert,
                                 contentDescription = "Trier",
                                 tint = White
                             )
@@ -145,8 +144,9 @@ fun EventListScreen(
 }
 
 @Composable
-fun EventItem(event: Event,
-              onClick: () -> Unit = {}
+fun EventItem(
+    event: Event,
+    onClick: () -> Unit = {}
 ) {
     Row(
         modifier = Modifier
@@ -155,7 +155,7 @@ fun EventItem(event: Event,
             .clip(RoundedCornerShape(8.dp))
             .background(DarkSurface)
             .clickable { onClick() }
-            .padding(12.dp),
+            .height(72.dp),  // ← hauteur fixe pour que l'image remplisse
         verticalAlignment = Alignment.CenterVertically
     ) {
         // Avatar circulaire à gauche
@@ -164,6 +164,7 @@ fun EventItem(event: Event,
             contentDescription = "Avatar",
             contentScale = ContentScale.Crop,
             modifier = Modifier
+                .padding(start = 12.dp)
                 .size(48.dp)
                 .clip(CircleShape)
                 .background(Color.Gray)
@@ -189,14 +190,15 @@ fun EventItem(event: Event,
             )
         }
 
-        // Image de l'événement à droite
+        // Image pleine hauteur à droite
         AsyncImage(
             model = event.imageUrl,
             contentDescription = "Image de l'événement",
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .size(width = 80.dp, height = 56.dp)
-                .clip(RoundedCornerShape(6.dp))
+                .width(100.dp)
+                .fillMaxHeight()  // ← pleine hauteur de la Row
+                .clip(RoundedCornerShape(topEnd = 8.dp, bottomEnd = 8.dp))
                 .background(Color.Gray)
         )
     }

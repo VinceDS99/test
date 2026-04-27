@@ -11,7 +11,6 @@ import android.content.Context
 import android.location.Geocoder
 import android.net.Uri
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.firestore.ktx.firestore
 import kotlinx.coroutines.tasks.await
 import java.util.Locale
 import java.util.UUID

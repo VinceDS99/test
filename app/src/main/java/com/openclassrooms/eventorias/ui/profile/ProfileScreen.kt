@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CameraAlt
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -32,17 +31,16 @@ import com.openclassrooms.eventorias.ui.theme.White
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileScreen(
-    viewModel: ProfileViewModel = hiltViewModel()
+    viewModel: ProfileViewModel = hiltViewModel(),
+    onSignOut: () -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val isUploadingPhoto by viewModel.isUploadingPhoto.collectAsState()
 
-    // Launcher galerie pour la photo de profil
     val galleryLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
     ) { uri -> uri?.let { viewModel.onPhotoSelected(it) } }
 
-    // Launcher permission notifications (Android 13+)
     val notificationPermissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission()
     ) { granted ->
@@ -80,7 +78,6 @@ fun ProfileScreen(
                                     .clip(CircleShape)
                                     .background(Color.Gray)
                             )
-                            // Spinner pendant l'upload
                             if (isUploadingPhoto) {
                                 Box(
                                     modifier = Modifier
@@ -166,21 +163,13 @@ fun ProfileScreen(
                         ProfileField(label = "Name", value = state.displayName)
                         ProfileField(label = "E-mail", value = state.email)
 
-                        // Toggle Notifications
+                        // Toggle Notifications sans encadré
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clip(RoundedCornerShape(8.dp))
-                                .background(DarkSurface)
-                                .padding(horizontal = 16.dp, vertical = 4.dp),
+                                .padding(horizontal = 4.dp, vertical = 4.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Text(
-                                text = "Notifications",
-                                color = White,
-                                fontSize = 16.sp,
-                                modifier = Modifier.weight(1f)
-                            )
                             Switch(
                                 checked = state.notificationsEnabled,
                                 onCheckedChange = { enabled ->
@@ -198,6 +187,31 @@ fun ProfileScreen(
                                     uncheckedThumbColor = Color.Gray,
                                     uncheckedTrackColor = DarkBackground
                                 )
+                            )
+                            Spacer(modifier = Modifier.width(12.dp))
+                            Text(
+                                text = "Notifications",
+                                color = White,
+                                fontSize = 16.sp
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        // Bouton déconnexion
+                        Button(
+                            onClick = { onSignOut() },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(52.dp),
+                            shape = RoundedCornerShape(4.dp),
+                            colors = ButtonDefaults.buttonColors(containerColor = RedPrimary)
+                        ) {
+                            Text(
+                                text = "Sign out",
+                                color = White,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 16.sp
                             )
                         }
                     }

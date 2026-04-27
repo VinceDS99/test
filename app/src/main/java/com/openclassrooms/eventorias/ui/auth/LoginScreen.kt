@@ -46,6 +46,7 @@ fun LoginScreen(
         val intent = AuthUI.getInstance()
             .createSignInIntentBuilder()
             .setAvailableProviders(providers)
+            .setIsSmartLockEnabled(false)
             .build()
         signInLauncher.launch(intent)
     }
@@ -101,7 +102,14 @@ fun LoginScreen(
         // Bouton Email
         Button(
             onClick = {
-                launchSignIn(listOf(AuthUI.IdpConfig.EmailBuilder().build()))
+                launchSignIn(
+                    listOf(
+                        AuthUI.IdpConfig.EmailBuilder()
+                            .setRequireName(true)        // demande nom/prénom à l'inscription
+                            .setAllowNewAccounts(true)   // autorise la création de compte
+                            .build()
+                    )
+                )
             },
             modifier = Modifier
                 .fillMaxWidth()

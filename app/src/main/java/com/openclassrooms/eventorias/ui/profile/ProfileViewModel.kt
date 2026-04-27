@@ -133,4 +133,5 @@ class ProfileViewModel @Inject constructor() : ViewModel() {
     fun retry() {
         loadProfile()
     }
+
 }

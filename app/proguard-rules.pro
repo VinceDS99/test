@@ -19,3 +19,13 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# Firestore — protège les data classes de la désérialisation
+-keep class com.openclassrooms.eventorias.data.model.** { *; }
+
+# Firebase
+-keep class com.google.firebase.** { *; }
+-keep class com.google.android.gms.** { *; }
+
+# Hilt
+-keep class dagger.hilt.** { *; }
